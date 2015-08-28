@@ -832,4 +832,29 @@ public Double geodist(String key, String... params) {
 	return j.geodist(key, params);
 }
 
+@Override
+public Long geoadd(String key, Double longitude, Double latitude, String params) {
+	Jedis j = getShard(key);
+	Long renum = j.geoadd(key,longitude,latitude, params);
+	return renum;
+}
+
+@Override
+public List<Map<String, String>> geopos(String key, String... params) {
+	Jedis j = getShard(key);
+	return j.geopos(key, params);
+}
+
+@Override
+public List<String> geoRadius(String key, String... params) {
+	Jedis j = getShard(key);
+	return j.geoRadius(key, params);
+}
+
+@Override
+public List<String> geoRediusByMember(String key, String... params) {
+	Jedis j = getShard(key);
+	return j.geoRediusByMember(key, params);
+}
+
 }

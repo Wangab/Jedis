@@ -3,7 +3,9 @@ package redis.clients.jedis;
 import java.net.URI;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -3439,6 +3441,45 @@ public class Jedis extends BinaryJedis implements JedisCommands, MultiKeyCommand
 public Double geodist(String key, String... params) {
 	client.geodist(key, params);
 	return Double.parseDouble(client.getBulkReply());
+}
+
+@Override
+public Long geoadd(String key, Double longitude, Double latitude, String params) {
+	client.geoadd(key,longitude, latitude, params);
+	return client.getIntegerReply();
+}
+
+@Override
+public List<Map<String, String>> geopos(String key, String... params) {
+	client.geopos(key, params);
+	List<Object> bys = client.getObjectMultiBulkReply();
+	List<Map<String, String>> result = new ArrayList<Map<String,String>>();
+	for(Object obj:bys){
+		List<byte[]> byteArrary = (List<byte[]>)obj;
+		byte[] bLongitude = byteArrary.get(0);
+		byte[] bLatitude = byteArrary.get(1);
+		String longitude = new String(bLongitude);
+		String latitude = new String(bLatitude);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("longitude", longitude);
+		map.put("latitude", latitude);
+		
+		result.add(map);
+	}
+	return result;
+}
+
+@Override
+public List<String> geoRadius(String key, String... params) {
+	client.geoRadius(key, params);
+	return client.getMultiBulkReply();
+}
+
+@Override
+public List<String> geoRediusByMember(String key, String... params) {
+	client.geoRediusByMember(key, params);
+	return client.getMultiBulkReply();
 }
 
 }

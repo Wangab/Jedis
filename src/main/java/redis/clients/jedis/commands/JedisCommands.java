@@ -20,6 +20,34 @@ public interface JedisCommands {
    * @return
    */
   Double geodist(String key, String... params);
+  /**
+   * 添加gps地址
+   * @param key
+   * @param params
+   */
+  Long geoadd(String key, Double l, Double t, String params);
+  /**
+   * 获取都低坐标
+   * @param key
+   * @param params
+   * @return
+   */
+  List<Map<String, String>> geopos(String key, String... params);
+  /**
+   * 以某个经纬度坐标点，为圆心查找一定距离内的redis内已存在的地点名；
+   * GEORADIUS 使用用户给定的经纬度作为计算范围时的中心点， 而 GEORADIUSBYMEMBER 则使用储存在位置集合里面的某个地点作为中心点。 
+   * @param key
+   * @param params
+   * @return
+   */
+  List<String> geoRadius(String key, String... params);
+  /**
+   * GEORADIUSBYMEMBER 则使用储存在位置集合里面的某个地点作为中心点,查找一定距离内的redis内已存在的地点名
+   * @param key
+   * @param params
+   * @return
+   */
+  List<String> geoRediusByMember(String key, String... params);
 	
   String set(String key, String value);
 

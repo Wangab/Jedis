@@ -1216,6 +1216,20 @@ public class BinaryClient extends Connection {
   public void geodist(final byte[]... args) {
 	 sendCommand(GEODIST, args);
   }
+  public void geoadd(final byte[]... args){
+	  sendCommand(GEOADD, args);
+  }
+  public void geopos(final byte[]... args){
+	  sendCommand(GEOPOS, args);
+  }
+  
+  public void geoRadius(final byte[]... args){
+	  sendCommand(GEORADIUS, args);
+  }
+  
+  public void geoRediusByMember(final byte[]... args){
+	  sendCommand(GEORADIUSBYMEMBER, args);
+  }
   
   private ArrayList<byte[]> convertScoreMembersToByteArrays(final Map<byte[], Double> scoreMembers) {
     ArrayList<byte[]> args = new ArrayList<byte[]>(scoreMembers.size() * 2);

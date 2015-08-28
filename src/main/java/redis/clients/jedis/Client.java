@@ -1010,6 +1010,33 @@ public class Client extends BinaryClient implements Commands {
 	    arg[0] = SafeEncoder.encode(subcommand);
 	    geodist(arg);
   }
+  public void geoadd(final String subcommand,final Double longitude, final Double latitude, final String arg){
+	    geoadd(SafeEncoder.encode(subcommand), toByteArray(longitude), toByteArray(latitude), SafeEncoder.encode(arg));
+  }
+  public void geopos(final String subcommand, final String... args) {
+	  final byte[][] arg = new byte[args.length + 1][];
+	    for (int i = 1; i < arg.length; i++) {
+	      arg[i] = SafeEncoder.encode(args[i - 1]);
+	    }
+	    arg[0] = SafeEncoder.encode(subcommand);
+	    geopos(arg);
+	}
+  public void geoRadius(final String subcommand, final String... args) {
+	  final byte[][] arg = new byte[args.length + 1][];
+	    for (int i = 1; i < arg.length; i++) {
+	      arg[i] = SafeEncoder.encode(args[i - 1]);
+	    }
+	    arg[0] = SafeEncoder.encode(subcommand);
+	    geoRadius(arg);
+	}
+  public void geoRediusByMember(final String subcommand, final String... args) {
+	  final byte[][] arg = new byte[args.length + 1][];
+	    for (int i = 1; i < arg.length; i++) {
+	      arg[i] = SafeEncoder.encode(args[i - 1]);
+	    }
+	    arg[0] = SafeEncoder.encode(subcommand);
+	    geoRediusByMember(arg);
+	}
   public void cluster(final String subcommand) {
     final byte[][] arg = new byte[1][];
     arg[0] = SafeEncoder.encode(subcommand);
@@ -1131,4 +1158,5 @@ public class Client extends BinaryClient implements Commands {
     }
     return binaryScoreMembers;
   }
+
 }
