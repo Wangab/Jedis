@@ -1,4 +1,8 @@
-[![Build Status](https://travis-ci.org/xetorthio/jedis.png?branch=master)](https://travis-ci.org/xetorthio/jedis)
+- add GEORADIUSBYMEMBER commad support;
+- add GEORADIUS commad support;
+- add GEODIST commad support;
+- add GEOPOS commad support;
+- add GEOADD commad support;
 
 # Jedis
 
@@ -7,8 +11,6 @@ Jedis is a blazingly small and sane [Redis](http://github.com/antirez/redis "Red
 Jedis was conceived to be EASY to use.
 
 Jedis is fully compatible with redis 2.8.x and 3.0.x.
-
-add support geodist commands.
 
 ## Community
 
