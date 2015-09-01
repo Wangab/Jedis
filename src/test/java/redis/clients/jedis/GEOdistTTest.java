@@ -38,4 +38,33 @@ public class GEOdistTTest {
 		System.out.println("两点之间距离:" + jedis.geodist("Guangdong-cities", "Guangzhou", "Foshan" ,"km"));
 		jedis.close();
 	}
+        @Test
+	public void testRedisGEOADD(){
+		Long a = jedis.geoadd("BeiJing-cities", 116.2314232, 34.4234563, "HaiDian");
+		Long b = jedis.geoadd("BeiJing-cities", 116.5314232, 34.4234563, "ChongWen");
+		Long c = jedis.geoadd("BeiJing-cities", 116.1314232, 34.4234563, "Chongwu");
+		Long d = jedis.geoadd("Guangdong-cities", 113.7943267, 22.9761989, "Dongguan");
+		Long e = jedis.geoadd("Guangdong-cities", 114.0538788, 22.5551603, "Shenzhen");
+		Long f = jedis.geoadd("Guangdong-cities", 113.2099647, 23.593675 , "Qingyuan");
+		Long f1 = jedis.geoadd("Guangdong-cities", 113.2278442, 23.1255978, "Guangzhou");
+		Long f2 = jedis.geoadd("Guangdong-cities", 113.106308, 23.0088312, "Foshan");
+		
+		System.out.println(a+","+b+","+c+","+d+","+e+","+f +","+f1+","+f2);
+	}
+	@Test
+	public void testRdiesGEOPOS(){
+		System.out.println("GPS:" + jedis.geopos("Guangdong-cities", "Guangzhou", "Foshan"));
+	}
+	@Test
+	public void testRedisGEODIST() throws InterruptedException{
+		System.out.println("两点之间距离:" + jedis.geodist("Guangdong-cities", "Guangzhou", "Dongguan" ,"km"));
+	}
+	@Test
+	public void testRedisGEORADIUS(){
+		System.out.println(jedis.geoRadius("Guangdong-cities", "113.2278442", "23.1255978", "50", "km"));
+	}
+	@Test
+	public void testRedisGEORADIUSBYMEMBER(){
+		System.out.println(jedis.geoRediusByMember("Guangdong-cities", "Guangzhou", "50", "km"));
+	}
 }
